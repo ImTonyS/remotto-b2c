@@ -101,8 +101,9 @@ The platform consists of 4 main funnels to engage users at different stages of t
 - **Framework**: Next.js 15 with App Router
 - **Language**: JavaScript (no TypeScript)
 - **Deployment**: Vercel (frontend + API routes)
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
+- **Styling**: Tailwind CSS v3.4.17
+- **UI Components**: Custom components + shadcn/ui
+- **Animations**: Framer Motion
 - **Authentication**: Supabase Auth
 - **State Management**: Zustand
 - **Forms**: React Hook Form
@@ -200,24 +201,40 @@ POST https://matching.railway.app/score-match
 
 ```
 remotto/
-├── app/                    # Next.js App Router
-│   ├── (landing)/         # Landing pages for 4 funnels
-│   │   ├── roast/         # CV Roast funnel
-│   │   ├── review/        # CV Review funnel
-│   │   ├── jobs/          # Job Matching funnel
-│   │   └── builder/       # CV Builder funnel
-│   ├── (dashboard)/       # User dashboard
-│   ├── api/               # API routes
-│   │   ├── cv/           # CV operations
-│   │   ├── user/         # User operations
-│   │   └── jobs/         # Job operations
-│   └── layout.js
-├── components/            # Reusable components
-├── lib/                   # Utilities
-│   ├── supabase.js       # Supabase client
-│   ├── railway.js        # Railway services integration
-│   └── utils.js
-├── public/               # Static assets
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (landing)/         # Landing pages for 4 funnels
+│   │   │   ├── roast/         # CV Roast funnel
+│   │   │   ├── review/        # CV Review funnel
+│   │   │   ├── jobs/          # Job Matching funnel
+│   │   │   └── builder/       # CV Builder funnel
+│   │   ├── (dashboard)/       # User dashboard
+│   │   ├── api/               # API routes
+│   │   │   ├── cv/           # CV operations
+│   │   │   ├── user/         # User operations
+│   │   │   └── jobs/         # Job operations
+│   │   ├── layout.js
+│   │   ├── page.js           # Home page
+│   │   └── globals.css       # Global styles
+│   ├── components/            # Reusable components
+│   │   ├── landing/          # Landing page components
+│   │   │   ├── Hero.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Features.jsx
+│   │   │   ├── Pricing.jsx
+│   │   │   └── Footer.jsx
+│   │   ├── dashboard/        # Dashboard components
+│   │   └── ui/               # UI components (buttons, cards, etc)
+│   ├── lib/                   # Utilities
+│   │   ├── supabase.js       # Supabase client
+│   │   ├── railway.js        # Railway services integration
+│   │   └── utils.js
+│   └── public/               # Static assets
+│       ├── images/
+│       └── icons/
+├── tailwind.config.js
+├── postcss.config.mjs
+├── jsconfig.json
 └── package.json
 ```
 
@@ -452,5 +469,25 @@ supabase db push
 
 ---
 
-Last updated: 2025-08-12
-Version: 1.0.0
+Last updated: 2025-08-14
+Version: 1.1.0
+
+## Important Notes
+
+### Folder Structure
+- All source code is inside `src/` directory
+- Components are in `src/components/`
+- App router pages are in `src/app/`
+- Public assets are in `src/public/`
+- Libraries and utilities are in `src/lib/`
+
+### Import Paths
+- Use `@/` alias for imports from `src/` directory
+- Example: `import Hero from '@/components/landing/Hero'`
+
+### Color Palette
+- Primary: #9928fd (purple)
+- Accent: #e300f7 (magenta)
+- Electric: #0800ff (blue)
+- Dark: #01103f (dark blue)
+- All colors have 11 shades (50-950) configured in Tailwind
